@@ -1,4 +1,4 @@
-###  --SMART CALCULATOR-- ###
+###  -- SMART CALCULATOR -- ###
 an all-in-one calculator application built with python, designed to handle everything from basic arithmetic to advanced calculators - all in a single app, no extra tool needed.
 
 ## FEATURES (Work in progress)
