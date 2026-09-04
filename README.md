@@ -1,9 +1,9 @@
-### smart Calculator ###
+### Smart Calculator ###
 an all-in-one calculator application built with python, designed to handle everything from basic arithmetic to advanced calculators - all in a single app, no extra tool needed.
 
 ## FEATURES (Work in progress)
 
-- [Done] Basic Calculator (add, subtraction, multiply, divide)
+- [] Basic Calculator (add, subtraction, multiply, divide)
 - [ ] Scientific Calculator (sin, cos, tan, log, power, square root)
 - [ ] Data Calculator (data difference, age calculation)
 - [ ] Calculation History
