@@ -3,7 +3,7 @@ an all-in-one calculator application built with python, designed to handle every
 
 ## FEATURES (Work in progress)
 
-- [ ] Basic Calculator (add, subtraction, multiply, divide)
+- [Done] Basic Calculator (add, subtraction, multiply, divide)
 - [ ] Scientific Calculator (sin, cos, tan, log, power, square root)
 - [ ] Data Calculator (data difference, age calculation)
 - [ ] Calculation History
@@ -20,3 +20,10 @@ an all-in-one calculator application built with python, designed to handle every
 
 - Clone this repository
 - git clone https://github.com/anshikaa-codes/smart-calculator.git
+- Install the required packages
+- Use calculator
+
+## STATUS
+
+- This project is currently under active development.
+- New features are being added step by step.
