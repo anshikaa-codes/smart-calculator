@@ -3,20 +3,20 @@ an all-in-one calculator application built with python, designed to handle every
 
 ## FEATURES (Work in progress)
 
-<> Basic Calculator (add, subtraction, multiply, divide)
-<> Scientific Calculator (sin, cos, tan, log, power, square root)
-<> Data Calculator (data difference, age calculation)
-<> Calculation History
-<> Modern GUI with sidebar navigation
-<> Input error handling 
+- [] Basic Calculator (add, subtraction, multiply, divide)
+- [] Scientific Calculator (sin, cos, tan, log, power, square root)
+- [] Data Calculator (data difference, age calculation)
+- [] Calculation History
+- [] Modern GUI with sidebar navigation
+- [] Input error handling 
 
 ## BUILT WITH 
 
-<> Python
-<> CustonTKinter (for GUI)
-<> Request (for currency API)
+- Python
+- CustonTKinter (for GUI)
+- Request (for currency API)
 
 ## HOW TO RUN 
 
-<> Clone this repository
-git clone https://github.com/anshikaa-codes/smart-calculator.git
+- Clone this repository
+- git clone https://github.com/anshikaa-codes/smart-calculator.git
