@@ -3,7 +3,7 @@ an all-in-one calculator application built with python, designed to handle every
 
 ## FEATURES (Work in progress)
 
-- [] Basic Calculator (add, subtraction, multiply, divide)
+- [x] Basic Calculator (add, subtraction, multiply, divide)
 - [ ] Scientific Calculator (sin, cos, tan, log, power, square root)
 - [ ] Data Calculator (data difference, age calculation)
 - [ ] Calculation History
