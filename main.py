@@ -1,7 +1,7 @@
 import customtkinter as ctk
 import math
 # App settings
-ctk.set_appearance_mode("dark")
+ctk.set_appearance_mode("black")
 ctk.set_default_color_theme("blue")
 
 app = ctk.CTk()
