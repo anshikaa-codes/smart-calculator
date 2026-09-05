@@ -1,14 +1,1 @@
-[
-  {
-    "calculation": "4-3",
-    "result": "1"
-  },
-  {
-    "calculation": "5*9-3/63",
-    "result": "44.95238095238095"
-  },
-  {
-    "calculation": "25*8/5-3+6",
-    "result": "43.0"
-  }
-]
+[]
