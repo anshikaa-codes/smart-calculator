@@ -1,4 +1,4 @@
-##  --  SMART CALCULATOR  --  ##
+##  **  SMART CALCULATOR  **  ##
 an all-in-one calculator application built with python, designed to handle everything from basic arithmetic to advanced calculators - all in a single app, no extra tool needed.
 
 ## FEATURES (Work in progress)
@@ -6,9 +6,9 @@ an all-in-one calculator application built with python, designed to handle every
 - [x] Basic Calculator (add, subtraction, multiply, divide)
 - [x] Scientific Calculator (sin, cos, tan, log, power, square root)
 - [x] Data Calculator (data difference, age calculation)
-- [ ] Calculation History
-- [ ] Modern GUI with sidebar navigation
-- [ ] Input error handling 
+- [x] Calculation History
+- [x] Modern GUI with sidebar navigation
+- [x] Input error handling 
 
 ## BUILT WITH 
 
