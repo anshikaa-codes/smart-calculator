@@ -163,12 +163,84 @@ def show_scientific_calculator():
             btn = ctk.CTkButton(row_frame, text=btn_text, font=("Arial", 18), command=cmd)
             btn.pack(side="left", expand=True, fill="both", padx=5, pady=5)
 
+# ================= DATE CALCULATOR PAGE =================
+def show_date_calculator():
+    from datetime import datetime
+    clear_content()
+
+    title = ctk.CTkLabel(content_area, text="Date Calculator", font=("Arial", 22, "bold"))
+    title.pack(pady=15)
+
+    # ---------- Section 1: Date Difference ----------
+    diff_frame = ctk.CTkFrame(content_area)
+    diff_frame.pack(fill="x", padx=20, pady=10)
+
+    diff_label = ctk.CTkLabel(diff_frame, text="Date Difference (DD-MM-YYYY)", font=("Arial", 16, "bold"))
+    diff_label.pack(pady=5)
+
+    entry_row1 = ctk.CTkFrame(diff_frame)
+    entry_row1.pack(pady=5)
+
+    start_date_entry = ctk.CTkEntry(entry_row1, placeholder_text="Start date (DD-MM-YYYY)", width=200)
+    start_date_entry.pack(side="left", padx=5)
+
+    end_date_entry = ctk.CTkEntry(entry_row1, placeholder_text="End date (DD-MM-YYYY)", width=200)
+    end_date_entry.pack(side="left", padx=5)
+
+    diff_result = ctk.CTkLabel(diff_frame, text="", font=("Arial", 16))
+    diff_result.pack(pady=10)
+
+    def calculate_difference():
+        try:
+            d1 = datetime.strptime(start_date_entry.get(), "%d-%m-%Y")
+            d2 = datetime.strptime(end_date_entry.get(), "%d-%m-%Y")
+            diff = abs((d2 - d1).days)
+            diff_result.configure(text=f"Difference: {diff} days")
+        except Exception:
+            diff_result.configure(text="Invalid date format! Use DD-MM-YYYY")
+
+    diff_btn = ctk.CTkButton(diff_frame, text="Calculate Difference", command=calculate_difference)
+    diff_btn.pack(pady=5)
+
+    # ---------- Section 2: Age Calculator ----------
+    age_frame = ctk.CTkFrame(content_area)
+    age_frame.pack(fill="x", padx=20, pady=20)
+
+    age_label = ctk.CTkLabel(age_frame, text="Age Calculator (DD-MM-YYYY)", font=("Arial", 16, "bold"))
+    age_label.pack(pady=5)
+
+    dob_entry = ctk.CTkEntry(age_frame, placeholder_text="Date of Birth (DD-MM-YYYY)", width=250)
+    dob_entry.pack(pady=5)
+
+    age_result = ctk.CTkLabel(age_frame, text="", font=("Arial", 16))
+    age_result.pack(pady=10)
+
+    def calculate_age():
+        try:
+            dob = datetime.strptime(dob_entry.get(), "%d-%m-%Y")
+            today = datetime.now()
+            years = today.year - dob.year
+            months = today.month - dob.month
+            days = today.day - dob.day
+
+            if days < 0:
+                months -= 1
+            if months < 0:
+                years -= 1
+                months += 12
+
+            age_result.configure(text=f"Age: {years} years, {months} months")
+        except Exception:
+            age_result.configure(text="Invalid date format! Use DD-MM-YYYY")
+
+    age_btn = ctk.CTkButton(age_frame, text="Calculate Age", command=calculate_age)
+    age_btn.pack(pady=5)
         
 # ================= SIDEBAR BUTTONS =================
 nav_buttons = [
     ("Basic", show_basic_calculator),
     ("Scientific", show_scientific_calculator),
-    ("Date", lambda: show_coming_soon("Date Calculator")),
+    ("Date", show_date_calculator),
     ("Currency", lambda: show_coming_soon("Currency Converter")),
     ("History", lambda: show_coming_soon("History")),
 ]
