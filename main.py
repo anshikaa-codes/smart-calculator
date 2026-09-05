@@ -1,8 +1,29 @@
 import customtkinter as ctk
 import math
+import json
+import os
+
 # App settings
 ctk.set_appearance_mode("black")
 ctk.set_default_color_theme("blue")
+
+# ================= HISTORY STORAGE =================
+HISTORY_FILE = "data/history.json"
+
+def load_history():
+    if os.path.exists(HISTORY_FILE):
+        try:
+            with open(HISTORY_FILE, "r") as f:
+                return json.load(f)
+        except Exception:
+            return []
+    return []
+
+def save_history_entry(calculation, result):
+    history = load_history()
+    history.append({"calculation": calculation, "result": result})
+    with open(HISTORY_FILE, "w") as f:
+        json.dump(history, f, indent=2)
 
 app = ctk.CTk()
 app.title("Smart Calculator")
@@ -52,7 +73,9 @@ def show_basic_calculator():
 
     def calculate():
         try:
-            result = str(eval(current_input["value"]))
+            expression = current_input["value"]
+            result = str(eval(expression))
+            save_history_entry(expression, result)
             result_var.set(result)
             current_input["value"] = result
         except Exception:
@@ -235,14 +258,103 @@ def show_date_calculator():
 
     age_btn = ctk.CTkButton(age_frame, text="Calculate Age", command=calculate_age)
     age_btn.pack(pady=5)
-        
+
+# ================= CURRENCY CONVERTER PAGE =================
+def show_currency_converter():
+
+
+    
+    import requests
+    clear_content()
+
+    title = ctk.CTkLabel(content_area, text="Currency Converter", font=("Arial", 22, "bold"))
+    title.pack(pady=15)
+
+    form_frame = ctk.CTkFrame(content_area)
+    form_frame.pack(pady=20)
+
+    amount_entry = ctk.CTkEntry(form_frame, placeholder_text="Enter amount", width=250)
+    amount_entry.pack(pady=10)
+
+    row = ctk.CTkFrame(form_frame)
+    row.pack(pady=10)
+
+    from_currency = ctk.CTkEntry(row, placeholder_text="From (e.g. USD)", width=120)
+    from_currency.pack(side="left", padx=5)
+
+    to_currency = ctk.CTkEntry(row, placeholder_text="To (e.g. INR)", width=120)
+    to_currency.pack(side="left", padx=5)
+
+    result_label = ctk.CTkLabel(content_area, text="", font=("Arial", 20, "bold"))
+    result_label.pack(pady=20)
+
+    def convert_currency():
+        try:
+            amount = float(amount_entry.get())
+            from_curr = from_currency.get().strip().upper()
+            to_curr = to_currency.get().strip().upper()
+
+            url = f"https://api.exchangerate-api.com/v4/latest/{from_curr}"
+            response = requests.get(url, timeout=5)
+            data = response.json()
+
+            rate = data["rates"][to_curr]
+            converted = amount * rate
+
+            result_label.configure(text=f"{amount} {from_curr} = {converted:.2f} {to_curr}")
+        except KeyError:
+            result_label.configure(text="Invalid currency code!")
+        except requests.exceptions.RequestException:
+            result_label.configure(text="No internet connection!")
+        except Exception:
+            result_label.configure(text="Error! Check your inputs.")
+
+    convert_btn = ctk.CTkButton(content_area, text="Convert", command=convert_currency,
+                                  font=("Arial", 16), width=200, height=45)
+    convert_btn.pack(pady=10)
+
+    note = ctk.CTkLabel(content_area, text="Note: Requires internet connection\nUse currency codes like USD, INR, EUR, GBP",
+                          font=("Arial", 12), text_color="gray")
+    note.pack(pady=10)
+
+# ================= HISTORY PAGE =================
+def show_history():
+    clear_content()
+
+    title = ctk.CTkLabel(content_area, text="Calculation History", font=("Arial", 22, "bold"))
+    title.pack(pady=15)
+
+    history = load_history()
+
+    if not history:
+        empty_label = ctk.CTkLabel(content_area, text="No history yet!", font=("Arial", 16))
+        empty_label.pack(pady=30)
+    else:
+        scroll_frame = ctk.CTkScrollableFrame(content_area, width=500, height=350)
+        scroll_frame.pack(padx=20, pady=10, fill="both", expand=True)
+
+        for entry in reversed(history):
+            entry_text = f'{entry["calculation"]} = {entry["result"]}'
+            entry_label = ctk.CTkLabel(scroll_frame, text=entry_text, font=("Arial", 14), anchor="w")
+            entry_label.pack(fill="x", padx=10, pady=5)
+
+    def clear_history():
+        with open(HISTORY_FILE, "w") as f:
+            json.dump([], f)
+        show_history()
+
+    clear_btn = ctk.CTkButton(content_area, text="Clear History", command=clear_history,
+                                fg_color="red", hover_color="darkred")
+    clear_btn.pack(pady=15)
+
+
 # ================= SIDEBAR BUTTONS =================
 nav_buttons = [
     ("Basic", show_basic_calculator),
     ("Scientific", show_scientific_calculator),
     ("Date", show_date_calculator),
-    ("Currency", lambda: show_coming_soon("Currency Converter")),
-    ("History", lambda: show_coming_soon("History")),
+    ("Currency", show_currency_converter),
+    ("History", show_history),
 ]
 
 for name, command in nav_buttons:
